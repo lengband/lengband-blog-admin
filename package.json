@@ -4,7 +4,8 @@
   "description": "Blog background management system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --watch build --exec \"webpack-dev-server --open --config build/webpack.dev.js\"",
+    "build": "rimraf dist && webpack --config build/webpack.prod.js"
   },
   "keywords": [
     "blog"
@@ -12,15 +13,29 @@
   "author": "lengband",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
     "eslint": "5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "husky": "^2.4.0",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.0",
-    "pretty-quick": "^1.11.0"
+    "pretty-quick": "^1.11.0",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.7.0"
+  },
+  "dependencies": {
+    "webpack-merge": "^4.2.1",
+    "html-webpack-plugin": "^3.2.0"
   },
   "husky": {
     "hooks": {
