@@ -12,7 +12,19 @@
   "author": "lengband",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "5.3.0",
     "eslint-config-prettier": "^4.3.0",
-    "prettier": "^1.18.0"
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.0",
+    "husky": "^2.4.0",
+    "prettier": "^1.18.0",
+    "pretty-quick": "^1.11.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && eslint . --ext .js,.jsx"
+    }
   }
 }
