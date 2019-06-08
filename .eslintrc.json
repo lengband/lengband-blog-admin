@@ -7,6 +7,7 @@
   "rules": {
     "react/prop-types": false,
     "react/destructuring-assignment": false,
-    "react/button-has-type": false
+    "react/button-has-type": false,
+    "no-useless-constructor": 0
   }
 }

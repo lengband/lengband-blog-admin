@@ -1,5 +1,30 @@
 import React from "react";
+import { observer, inject } from "mobx-react";
 
-export default function Dashboard() {
-  return <h1>Dashboard</h1>;
+@inject("store")
+@observer
+class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  addCount = () => {
+    this.props.store.addCount();
+  };
+
+  reduceCount = () => {
+    this.props.store.reduceCount();
+  };
+
+  render() {
+    return (
+      <div>
+        <p>{this.props.store.count}</p>
+        <button onClick={this.reduceCount}>minus</button>
+        <button onClick={this.addCount}>add</button>
+      </div>
+    );
+  }
 }
+
+export default Dashboard;
