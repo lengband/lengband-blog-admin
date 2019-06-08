@@ -4,6 +4,7 @@
   "description": "Blog background management system",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "start": "nodemon --watch build --exec \"webpack-dev-server --open --config build/webpack.dev.js\"",
     "dev": "npm run start",
     "build": "rimraf dist && webpack --config build/webpack.prod.js"
@@ -26,6 +27,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
     "husky": "^2.4.0",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "prettier": "^1.18.0",
     "pretty-quick": "^1.11.0",
