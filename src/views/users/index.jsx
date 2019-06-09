@@ -1,5 +1,13 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
+import { AccessAlarm, ThreeDRotation } from "@material-ui/icons";
 
 export default function Users() {
-  return <h1>Users</h1>;
+  return (
+    <div>
+      <Button>user</Button>
+      <AccessAlarm>AccessAlarm</AccessAlarm>
+      <ThreeDRotation>ThreeDRotation</ThreeDRotation>
+    </div>
+  );
 }
