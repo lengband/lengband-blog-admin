@@ -38,7 +38,7 @@ function App() {
           <Route path="/users" name="Users" component={Users} />
         </Router>
         <Button variant="outlined" color="primary">
-          Primary1
+          Primary
         </Button>
         <Button variant="outlined" color="secondary">
           Secondary

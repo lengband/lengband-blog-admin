@@ -6,11 +6,23 @@ module.exports = merge(common, {
   devtool: "source-map",
   optimization: {
     splitChunks: {
-      vendor: {
-        commons: {
+      chunks: "async",
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: "~",
+      name: true,
+      cacheGroups: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-          chunks: "all"
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     }
