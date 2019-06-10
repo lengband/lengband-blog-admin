@@ -27,19 +27,12 @@ module.exports = {
         use: [{ loader: "style-loader" }, { loader: "css-loader" }]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: "url-loader",
-        options: {
-          limit: 50000,
-          name: path.join(__dirname, "static/[name].[hash:7].[ext]")
-        }
+        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        loader: "url-loader"
       },
       {
-        test: /\.(wav|mp3|eot|ttf)$/,
-        loader: "file-loader",
-        options: {
-          name: path.join(__dirname, "static/[name].[hash:7].[ext]")
-        }
+        test: /\.(woff|woff2|wav|mp3|eot|ttf)$/,
+        loader: "file-loader"
       }
     ]
   },

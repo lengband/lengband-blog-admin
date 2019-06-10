@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from "styled-components";
+import "./styles/index.css";
 import { Button } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Provider } from "mobx-react";
