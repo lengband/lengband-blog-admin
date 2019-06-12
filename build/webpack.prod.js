@@ -1,4 +1,5 @@
 const merge = require("webpack-merge");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const common = require("./webpack.base.js");
 
 module.exports = merge(common, {
@@ -34,5 +35,6 @@ module.exports = merge(common, {
         }
       }
     }
-  }
+  },
+  plugins: [new CleanWebpackPlugin()]
 });
