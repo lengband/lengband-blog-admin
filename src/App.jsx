@@ -1,49 +1,31 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import styled from "styled-components";
-import "./styles/index.css";
-import { Button } from "@material-ui/core";
+import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { renderRoutes } from "react-router-config";
 import { Provider } from "mobx-react";
 import Store from "./store/index";
-import Dashboard from "./views/dashboard";
-import Users from "./views/users";
+import routes from "./routes/routes";
+import Router from "./routes/Routers";
+import Layouts from "./components/layouts/index";
+import routes1 from "@/routes/routes1";
+import "./styles/index.css";
+// import Test from './views/test'
 
 const store = new Store();
-const Wrapper = styled.section`
-  padding: 5px
-  background: papayawhip
-`;
-
-const Title = styled.h1`
-  font-size: 1.5em
-  color: red
-`;
 
 function App() {
   return (
     <Provider store={store}>
-      <Wrapper>
+      <ThemeProvider>
         <CssBaseline />
-        <Title>title</Title>
-        <div>Hello world</div>
-        <Router>
-          <Link to="/">
-            <button>dashboard</button>
-          </Link>
-          <Link to="/users">
-            <button>users</button>
-          </Link>
-          <Route path="/" name="Dashboard" exact component={Dashboard} />
-          <Route path="/users" name="Users" component={Users} />
-        </Router>
-        <Button variant="outlined" color="primary">
-          Primary
-        </Button>
-        <Button variant="outlined" color="secondary">
-          Secondary
-        </Button>
-      </Wrapper>
+        {/* <Test /> */}
+        <BrowserRouter>
+          <Router />
+          <Layouts />
+          {/* {renderRoutes(routes)} */}
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
   );
 }

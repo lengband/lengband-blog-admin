@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ width: 400, height: 400, background: "red" }}>
         <p>{this.props.store.count}</p>
         <button onClick={this.reduceCount}>minus</button>
         <button onClick={this.addCount}>add</button>
