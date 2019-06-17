@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default (loadComponent, placeholder = "拼命加载中...") => {
-  const FullScreenLoading = ({ placeholderFrom }) => {
+  const FullScreenLoading = ({ placeholder: placeholderFrom }) => {
     const classes = useStyles();
     return (
       <Container className={classes.container}>

@@ -10,7 +10,7 @@ export const flattenRoutes = (arr, field, time = 2) => {
   let tempTime = time;
   function deepFlatten(SingleArr) {
     if (tempTime <= 0) return;
-    tempTime -= tempTime;
+    tempTime -= 1;
     let nextArr = [];
     SingleArr.forEach(item => {
       flattenArr.push(item);
