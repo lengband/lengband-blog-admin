@@ -34,12 +34,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ToolBar = props => {
-  console.log(props, "props");
   const { open, handleDrawerOpen } = props;
   const classes = useStyles();
-  const drawerOpen = function() {
+  function drawerOpen() {
     handleDrawerOpen();
-  };
+  }
   return (
     <AppBar
       position="fixed"

@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import { renderRoutes } from "react-router-config";
 
 import ToolBar from "./ToolBar";
 import SliderMenu from "./SliderMenu";
@@ -47,7 +48,8 @@ const styles = theme => {
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
+      marginTop: 64
     }
   };
 };
@@ -62,6 +64,7 @@ class Layouts extends React.Component {
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
   }
+
   handleDrawerOpen() {
     this.setState({
       open: true
@@ -76,7 +79,7 @@ class Layouts extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { classes } = this.props;
+    const { classes, route, location } = this.props;
 
     return (
       <div className={classes.root}>
@@ -100,9 +103,9 @@ class Layouts extends React.Component {
               <ChevronLeftIcon />
             </IconButton>
           </div>
-          <SliderMenu />
+          <SliderMenu locationPath={location.pathname} />
         </Drawer>
-        <main className={classes.content}>{this.props.children}</main>
+        <main className={classes.content}>{renderRoutes(route.routes)}</main>
       </div>
     );
   }

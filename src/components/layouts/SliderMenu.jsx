@@ -1,19 +1,48 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { matchRoutes } from "react-router-config";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import ErrorIcon from "@material-ui/icons/Error";
 import List from "@material-ui/core/List";
+
 import routes from "../../routes/routes";
+import { flattenRoutes } from "../../lib/utils";
 
 export default class SliderMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: routes[0].name
+      active: routes[0].name,
+      menuList: []
     };
+  }
+
+  componentDidMount() {
+    this.setMenuList();
+    this.setActiveMenu();
+  }
+
+  setMenuList() {
+    let menuList = flattenRoutes(routes, "routes");
+    menuList = menuList.filter(item => item.path !== "/");
+    this.setState({
+      menuList
+    });
+  }
+
+  setActiveMenu() {
+    const { locationPath } = this.props;
+    const matchList = matchRoutes(routes, locationPath);
+    const matched = matchList.find(
+      item => item.match.isExact && item.match.path === locationPath
+    );
+    if (matched) {
+      this.setState({
+        active: matched.route.name
+      });
+    }
   }
 
   listClick(currentName) {
@@ -23,20 +52,21 @@ export default class SliderMenu extends React.Component {
   }
 
   render() {
-    const { active } = this.state;
+    const { active, menuList } = this.state;
+
     return (
       <List>
-        {routes.map((item, index) => (
-          <Link to={item.path} key={item.name}>
+        {menuList.map(route => (
+          <Link to={route.path} key={route.name}>
             <ListItem
               button
-              selected={item.name === active}
-              onClick={() => this.listClick(item.name)}
+              selected={route.name === active}
+              onClick={() => this.listClick(route.name)}
             >
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {route.meta.icon ? <route.meta.icon /> : <ErrorIcon />}
               </ListItemIcon>
-              <ListItemText primary={item.label} />
+              <ListItemText primary={route.label} />
             </ListItem>
           </Link>
         ))}
