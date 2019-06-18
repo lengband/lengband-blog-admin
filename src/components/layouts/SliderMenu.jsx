@@ -38,9 +38,11 @@ export default class SliderMenu extends React.Component {
     const matched = matchList.find(
       item => item.match.isExact && item.match.path === locationPath
     );
+    const { name, redirectName } = matched.route;
+    const active = redirectName || name;
     if (matched) {
       this.setState({
-        active: matched.route.name
+        active
       });
     }
   }

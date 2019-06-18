@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { renderRoutes } from "react-router-config";
+import renderRoutes from "@/components/renderRoutes";
+import { Redirect } from "react-router-dom";
 
 import ToolBar from "./ToolBar";
 import SliderMenu from "./SliderMenu";
@@ -105,7 +106,12 @@ class Layouts extends React.Component {
           </div>
           <SliderMenu locationPath={location.pathname} />
         </Drawer>
-        <main className={classes.content}>{renderRoutes(route.routes)}</main>
+        <main className={classes.content}>
+          {location.pathname === "/" ? (
+            <Redirect to={route.redirectTo} />
+          ) : null}
+          {renderRoutes({ routes: route.routes })}
+        </main>
       </div>
     );
   }

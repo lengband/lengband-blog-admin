@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { renderRoutes } from "react-router-config";
+import renderRoutes from "@/components/renderRoutes";
 import { Provider } from "mobx-react";
 import Store from "./store/index";
 import routes from "./routes/routes";
@@ -18,7 +18,7 @@ function App() {
         <CssBaseline />
         {/* <Test /> */}
         <BrowserRouter>
-          <Switch>{renderRoutes(routes)}</Switch>
+          <Switch>{renderRoutes({ routes })}</Switch>
         </BrowserRouter>
       </ThemeProvider>
     </Provider>

@@ -7,6 +7,8 @@ const routes = [
     path: "/",
     name: "layouts",
     component: AsyncLoad(() => import("../components/layouts/index")),
+    redirectTo: "/dashboard",
+    redirectName: "dashboard",
     routes: [
       {
         path: "/dashboard",
