@@ -58,20 +58,26 @@ export default class SliderMenu extends React.Component {
 
     return (
       <List>
-        {menuList.map(route => (
-          <Link to={route.path} key={route.name}>
-            <ListItem
-              button
-              selected={route.name === active}
-              onClick={() => this.listClick(route.name)}
-            >
-              <ListItemIcon>
-                {route.meta.icon ? <route.meta.icon /> : <ErrorIcon />}
-              </ListItemIcon>
-              <ListItemText primary={route.label} />
-            </ListItem>
-          </Link>
-        ))}
+        {menuList.map(route =>
+          route.hidden ? null : (
+            <Link to={route.path} key={route.name}>
+              <ListItem
+                button
+                selected={route.name === active}
+                onClick={() => this.listClick(route.name)}
+              >
+                <ListItemIcon>
+                  {route.meta && route.meta.icon ? (
+                    <route.meta.icon />
+                  ) : (
+                    <ErrorIcon />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={route.label} />
+              </ListItem>
+            </Link>
+          )
+        )}
       </List>
     );
   }

@@ -4,6 +4,24 @@ import PersionIcon from "@material-ui/icons/Person";
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    hidden: true,
+    component: AsyncLoad(() => import("../views/login/index"))
+  },
+  {
+    path: "/register",
+    name: "login",
+    hidden: true,
+    component: AsyncLoad(() => import("../views/register/index"))
+  },
+  {
+    path: "/forget",
+    name: "login",
+    hidden: true,
+    component: AsyncLoad(() => import("../views/forget/index"))
+  },
+  {
     path: "/",
     name: "layouts",
     component: AsyncLoad(() => import("../components/layouts/index")),
