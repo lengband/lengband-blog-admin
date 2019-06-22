@@ -6,7 +6,7 @@ import renderRoutes from "@/components/renderRoutes";
 import { Provider } from "mobx-react";
 import Store from "./store/index";
 import routes from "./routes/routes";
-import "./styles/index.css";
+import "./styles/index.scss";
 // import Test from './views/test'
 
 const store = new Store();

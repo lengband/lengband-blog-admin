@@ -13,6 +13,12 @@
     "import/prefer-default-export": 0,
     "import/no-unresolved": 0,
     "import/no-cycle": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   }
 }

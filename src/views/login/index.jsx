@@ -1,18 +1,21 @@
 import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import {
+  Box,
+  Avatar,
+  FormControlLabel,
+  Checkbox,
+  Link,
+  Paper,
+  Grid,
+  Typography
+} from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import { RouterLink } from "@/components/common";
+import { withStyles } from "@material-ui/core/styles";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { regexp } from "@/lib/validateForm";
+import AsyncButton from "@/components/AsyncButton";
 
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
     height: "100vh"
   },
@@ -35,76 +38,200 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
   }
-}));
+});
 
-export default function SignInSide() {
-  const classes = useStyles();
-  return (
-    <Grid container component="main" className={classes.root}>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            登录
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="记住我"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
+const FORM_MODE = {
+  login: {
+    title: "登录",
+    buttonText: "登录",
+    pswLabel: "密码",
+    formType: "login"
+  },
+  register: {
+    title: "注册",
+    buttonText: "注册",
+    pswLabel: "密码",
+    formType: "register"
+  },
+  forget: {
+    title: "忘记密码",
+    buttonText: "验证",
+    pswLabel: "旧密码",
+    formType: "forget"
+  },
+  reset: {
+    title: "重置密码",
+    buttonText: "登录",
+    pswLabel: "新密码",
+    formType: "reset"
+  }
+};
+
+@withStyles(styles)
+export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      formMode: FORM_MODE.login,
+      formData: {
+        username: "",
+        password: ""
+      }
+    };
+    this.submit = this.submit.bind(this);
+    this.formChange = this.formChange.bind(this);
+  }
+
+  componentDidMount() {
+    ValidatorForm.addValidationRule("username", value => {
+      return regexp.username.reg.test(value);
+    });
+  }
+
+  changeFormType(type) {
+    this.setState({
+      formMode: FORM_MODE[type || "login"]
+    });
+  }
+
+  submit() {
+    const { formType } = this.state.formMode;
+    switch (formType) {
+      case "register":
+        this.goRegister();
+        break;
+      case "forget":
+        this.goForget();
+        break;
+      case "reset":
+        this.goReset();
+        break;
+      default:
+        this.goLogin();
+        break;
+    }
+  }
+
+  goRegister() {}
+
+  goForget() {
+    // 调取API验证，初步构想在以往的密码历史里找出匹配的一项
+    // xxx
+    setTimeout(() => {
+      this.setState({
+        formMode: FORM_MODE.reset
+      });
+    }, 1000);
+  }
+
+  goReset() {}
+
+  goLogin() {
+    this.setState({
+      loading: true
+    });
+  }
+
+  formChange(event) {
+    this.setState({
+      formData: {
+        ...this.state.formData,
+        [event.target.name]: event.target.value
+      }
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { formData, formMode, loading } = this.state;
+    const { title, formType, buttonText, pswLabel } = formMode;
+    const RememberBtn =
+      formType === "login" ? (
+        <FormControlLabel
+          className="float-left w-100"
+          control={<Checkbox value="remember" color="primary" />}
+          label="记住我"
+        />
+      ) : null;
+    const LoginControl =
+      formType === "login" ? (
+        <Grid container>
+          <Grid item xs>
+            <Link
+              onClick={() => this.changeFormType("forget")}
+              component="button"
             >
-              登 录
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to="/forget" component={RouterLink}>
-                  忘记密码?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to="/register" component={RouterLink}>
-                  还没有账号，去注册
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
+              忘记密码?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link
+              onClick={() => this.changeFormType("register")}
+              component="button"
+            >
+              还没有账号，去注册
+            </Link>
+          </Grid>
+        </Grid>
+      ) : null;
+    return (
+      <Grid container component="main" className={classes.root}>
+        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid
+          className="position-relative"
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+        >
+          <Box position="absolute" top={10} right={10}>
+            Lengband Blog
+          </Box>
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              {title}
+            </Typography>
+            <ValidatorForm style={{ width: "100%" }} onSubmit={this.submit}>
+              <TextValidator
+                autoFocus
+                margin="normal"
+                label="用户名"
+                fullWidth
+                onChange={this.formChange}
+                value={formData.username}
+                name="username"
+                validators={["required", "username"]}
+                errorMessages={["请填写用户名", "用户名仅允许数字和字母的格式"]}
+              />
+              <br />
+              <TextValidator
+                margin="normal"
+                label={pswLabel}
+                fullWidth
+                onChange={this.formChange}
+                name="password"
+                value={formData.password}
+                validators={["required"]}
+                errorMessages={["请填写密码"]}
+                type="password"
+              />
+              <AsyncButton loading={loading} type="submit" fullWidth>
+                {buttonText}
+              </AsyncButton>
+            </ValidatorForm>
+            {RememberBtn}
+            {LoginControl}
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
+  }
 }
