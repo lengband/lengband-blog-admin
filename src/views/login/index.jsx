@@ -13,7 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { withStyles } from "@material-ui/core/styles";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { regexp } from "@/lib/validateForm";
-import AsyncButton from "@/components/AsyncButton";
+import AsyncButton from "@/components/base/AsyncButton";
 
 const styles = theme => ({
   root: {

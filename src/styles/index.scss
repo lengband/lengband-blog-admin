@@ -1,0 +1,18 @@
+a {
+  text-decoration: none;
+  color: #333;
+  &:link,
+  &:active,
+  &:hover,
+  &:visited {
+    text-decoration: none;
+  }
+}
+
+// 编辑器样式
+.editor-toolbar.fullscreen,
+.CodeMirror-fullscreen,
+.editor-preview-side,
+.editor-statusbar {
+  z-index: 1201 !important;
+}
