@@ -1,13 +1,9 @@
-import { action, observable } from "mobx";
+import appStore from "./app";
+import menuStore from "./menu";
 
-export default class Store {
-  @observable count = 0;
+const stores = {
+  appStore,
+  menuStore
+};
 
-  @action addCount() {
-    this.count += 1;
-  }
-
-  @action reduceCount() {
-    this.count -= 1;
-  }
-}
+export default stores;

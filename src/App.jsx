@@ -5,17 +5,15 @@ import { SnackbarProvider } from "notistack";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import renderRoutes from "@/components/renderRoutes";
 import { Provider } from "mobx-react";
-import Store from "./store/index";
+import stores from "./store";
 import routes from "./routes/routes";
 import { snackbarConfig } from "@/constants";
 import "./styles/index.scss";
 // import Test from './views/test'
 
-const store = new Store();
-
 function App() {
   return (
-    <Provider store={store}>
+    <Provider {...stores}>
       <SnackbarProvider {...snackbarConfig}>
         <CssBaseline />
         {/* <Test /> */}

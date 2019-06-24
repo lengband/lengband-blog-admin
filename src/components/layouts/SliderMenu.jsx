@@ -1,60 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { matchRoutes } from "react-router-config";
+import PropTypes from "prop-types";
+import { observer, inject } from "mobx-react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ErrorIcon from "@material-ui/icons/Error";
 import List from "@material-ui/core/List";
 
-import routes from "../../routes/routes";
-import { flattenRoutes } from "../../lib/utils";
-
+@inject("menuStore")
+@observer
 export default class SliderMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: routes[0].name,
-      menuList: []
-    };
+  constructor(props, context) {
+    super(props, context);
   }
 
   componentDidMount() {
-    this.setMenuList();
-    this.setActiveMenu();
-  }
-
-  setMenuList() {
-    let menuList = flattenRoutes(routes, "routes");
-    menuList = menuList.filter(item => item.path !== "/");
-    this.setState({
-      menuList
-    });
-  }
-
-  setActiveMenu() {
     const { locationPath } = this.props;
-    const matchList = matchRoutes(routes, locationPath);
-    const matched = matchList.find(
-      item => item.match.isExact && item.match.path === locationPath
-    );
-    const { name, redirectName } = matched.route;
-    const active = redirectName || name;
-    if (matched) {
-      this.setState({
-        active
-      });
-    }
+    this.props.menuStore.setMenuList();
+    this.props.menuStore.setActiveMenu(locationPath);
   }
 
   listClick(currentName) {
-    this.setState({
-      active: currentName
-    });
+    this.props.menuStore.setActive(currentName);
   }
 
   render() {
-    const { active, menuList } = this.state;
+    const { active, menuList } = this.props.menuStore;
 
     return (
       <List>
@@ -82,3 +54,7 @@ export default class SliderMenu extends React.Component {
     );
   }
 }
+
+SliderMenu.propTypes = {
+  locationPath: PropTypes.string.isRequired
+};

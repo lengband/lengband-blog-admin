@@ -1,7 +1,7 @@
 import AsyncLoad from "@/components/AsyncLoad";
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersionIcon from "@material-ui/icons/Person";
-// import NotesIcon from "@material-ui/icons/Notes"; // 文章list
+import NotesIcon from "@material-ui/icons/Notes"; // 文章list
 import CreateIcon from "@material-ui/icons/Create";
 
 const routes = [
@@ -35,6 +35,15 @@ const routes = [
           icon: PersionIcon
         },
         component: AsyncLoad(() => import("../views/users/index"))
+      },
+      {
+        path: "/article",
+        name: "article",
+        label: "文章",
+        meta: {
+          icon: NotesIcon
+        },
+        component: AsyncLoad(() => import("../views/article/index"))
       },
       {
         path: "/write",

@@ -114,8 +114,6 @@ export default class Login extends React.Component {
     }
   }
 
-  goRegister() {}
-
   goForget() {
     // 调取API验证，初步构想在以往的密码历史里找出匹配的一项
     // xxx
@@ -126,7 +124,13 @@ export default class Login extends React.Component {
     }, 1000);
   }
 
-  goReset() {}
+  goRegister() {
+    this.register = true; // 暂时无用，躲避 eslint
+  }
+
+  goReset() {
+    this.reset = true; // 暂时无用，躲避 eslint
+  }
 
   goLogin() {
     this.setState({

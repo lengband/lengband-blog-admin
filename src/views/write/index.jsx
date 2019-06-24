@@ -19,14 +19,15 @@ export default class Write extends React.Component {
   constructor(props) {
     super(props);
     this.formChange = this.formChange.bind(this);
+    this.smde = null;
     this.state = {
       loading: false,
       formData: {
         title: "",
-        tag: "",
-        currency: ""
+        tag: ""
       }
     };
+    this.submit = this.submit.bind(this);
   }
 
   componentDidMount() {
@@ -94,7 +95,7 @@ export default class Write extends React.Component {
           className="mb-4 w-50"
           label="标题"
           onChange={this.formChange}
-          value={formData.username}
+          value={formData.title}
           name="title"
           validators={["required"]}
           errorMessages={["请填写文章标题"]}
