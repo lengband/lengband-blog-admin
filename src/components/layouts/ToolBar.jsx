@@ -6,8 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import Typography from "@material-ui/core/Typography";
-
-const drawerWidth = 240;
+import { drawerWidth } from "@/constants";
 
 const useStyles = makeStyles(theme => ({
   appBar: {

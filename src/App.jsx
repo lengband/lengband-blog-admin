@@ -9,7 +9,7 @@ import stores from "./store";
 import routes from "./routes/routes";
 import { snackbarConfig } from "@/constants";
 import "./styles/index.scss";
-// import Test from './views/test'
+// import Test from "./views/test";
 
 function App() {
   return (

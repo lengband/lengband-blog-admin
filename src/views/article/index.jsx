@@ -1,6 +1,7 @@
 import React from "react";
 import { observer, inject } from "mobx-react";
-import MaterialTable from "material-table";
+import Add from "@material-ui/icons/Add";
+import MaterialTable from "@/components/base/MaterialTable";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
@@ -48,7 +49,7 @@ export default class RemoteData extends React.Component {
         }}
         actions={[
           {
-            icon: "add",
+            icon: props => <Add {...props} />,
             tooltip: "添加文章",
             isFreeAction: true,
             onClick: () => {

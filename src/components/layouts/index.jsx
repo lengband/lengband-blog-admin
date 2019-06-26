@@ -9,8 +9,8 @@ import { Redirect } from "react-router-dom";
 
 import ToolBar from "./ToolBar";
 import SliderMenu from "./SliderMenu";
-
-const drawerWidth = 240;
+import ContentTabs from "./ContentTabs";
+import { drawerWidth } from "@/constants";
 
 const styles = theme => {
   return {
@@ -47,10 +47,24 @@ const styles = theme => {
       padding: "0 8px",
       ...theme.mixins.toolbar
     },
+    contentWrapper: {
+      transition: theme.transitions.create("width", {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen
+      })
+    },
+    contentWrapperMin: {
+      width: `calc(100% - ${drawerWidth}px)`
+    },
+    contentWrapperMax: {
+      width: `calc(100% - ${theme.spacing(7) + 1}px)`,
+      [theme.breakpoints.up("sm")]: {
+        width: `calc(100% - ${theme.spacing(9) + 1}px)`
+      }
+    },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
-      marginTop: 64
+      padding: theme.spacing(3)
     }
   };
 };
@@ -106,12 +120,20 @@ class Layouts extends React.Component {
           </div>
           <SliderMenu locationPath={location.pathname} />
         </Drawer>
-        <main className={classes.content}>
-          {location.pathname === "/" ? (
-            <Redirect to={route.redirectTo} />
-          ) : null}
-          {renderRoutes({ routes: route.routes })}
-        </main>
+        <div
+          className={clsx("d-flex", "flex-column", classes.contentWrapper, {
+            [classes.contentWrapperMin]: open,
+            [classes.contentWrapperMax]: !open
+          })}
+        >
+          <ContentTabs />
+          <main className={classes.content}>
+            {location.pathname === "/" ? (
+              <Redirect to={route.redirectTo} />
+            ) : null}
+            {renderRoutes({ routes: route.routes })}
+          </main>
+        </div>
       </div>
     );
   }

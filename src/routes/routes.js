@@ -3,6 +3,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersionIcon from "@material-ui/icons/Person";
 import NotesIcon from "@material-ui/icons/Notes"; // 文章list
 import CreateIcon from "@material-ui/icons/Create";
+import WorkIcon from "@material-ui/icons/Work";
 
 const routes = [
   {
@@ -35,6 +36,15 @@ const routes = [
           icon: PersionIcon
         },
         component: AsyncLoad(() => import("../views/users/index"))
+      },
+      {
+        path: "/todo",
+        name: "todo",
+        label: "TODO",
+        meta: {
+          icon: WorkIcon
+        },
+        component: AsyncLoad(() => import("../views/todo/index"))
       },
       {
         path: "/article",
