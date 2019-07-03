@@ -95,6 +95,7 @@ class Layouts extends React.Component {
   render() {
     const { open } = this.state;
     const { classes, route, location } = this.props;
+    const RouterMaps = renderRoutes({ routes: route.routes });
 
     return (
       <div className={classes.root}>
@@ -126,12 +127,12 @@ class Layouts extends React.Component {
             [classes.contentWrapperMax]: !open
           })}
         >
-          <ContentTabs />
+          <ContentTabs history={this.props.history} />
           <main className={classes.content}>
             {location.pathname === "/" ? (
               <Redirect to={route.redirectTo} />
             ) : null}
-            {renderRoutes({ routes: route.routes })}
+            {RouterMaps}
           </main>
         </div>
       </div>

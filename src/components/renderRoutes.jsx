@@ -15,8 +15,8 @@ const renderComponent = ({ route, authed, extraProps }) => {
 };
 
 // const renderRoutes = ({ routes, authed, authPath = '/login', extraProps = {}, switchProps = {} }) => routes ? (
-const renderRoutes = ({ routes, switchProps = {}, ...rest }) =>
-  routes ? (
+const renderRoutes = ({ routes, switchProps = {}, ...rest }) => {
+  return routes ? (
     <Switch {...switchProps}>
       {routes.map((route, i) => (
         <Route
@@ -29,5 +29,6 @@ const renderRoutes = ({ routes, switchProps = {}, ...rest }) =>
       ))}
     </Switch>
   ) : null;
+};
 
 export default renderRoutes;

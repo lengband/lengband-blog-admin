@@ -1,6 +1,5 @@
 import { action, observable } from "mobx";
 import { matchRoutes } from "react-router-config";
-
 import routes from "@/routes/routes";
 import { flattenRoutes } from "@/lib/utils";
 
