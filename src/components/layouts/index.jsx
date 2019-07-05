@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 
 import ToolBar from "./ToolBar";
 import SliderMenu from "./SliderMenu";
-import ContentTabs from "./ContentTabs";
+import ContentTabs from "./content-tabs/index";
 import { drawerWidth } from "@/constants";
 
 const styles = theme => {

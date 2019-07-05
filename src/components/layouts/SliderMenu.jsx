@@ -8,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ErrorIcon from "@material-ui/icons/Error";
 import List from "@material-ui/core/List";
 
+@inject("tabStore")
 @inject("menuStore")
 @observer
 export default class SliderMenu extends React.Component {
@@ -21,8 +22,9 @@ export default class SliderMenu extends React.Component {
     this.props.menuStore.setActiveMenu(locationPath);
   }
 
-  listClick(currentName) {
-    this.props.menuStore.setActive(currentName);
+  listClick(route) {
+    this.props.menuStore.setActive(route.name);
+    this.props.tabStore.addRoute(route);
   }
 
   render() {
@@ -36,7 +38,7 @@ export default class SliderMenu extends React.Component {
               <ListItem
                 button
                 selected={route.name === active}
-                onClick={() => this.listClick(route.name)}
+                onClick={() => this.listClick(route)}
               >
                 <ListItemIcon>
                   {route.meta && route.meta.icon ? (
