@@ -81,8 +81,6 @@ export default class Create extends React.Component {
   }
 
   confirm() {
-    console.log("confirm");
-
     this.cancel();
   }
 
