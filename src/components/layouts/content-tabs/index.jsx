@@ -15,7 +15,6 @@ const styles = theme => ({
     height: "max-content"
   },
   tab: {
-    outline: "none!important",
     "&:hover": {
       color: theme.palette.primary.light
     }
@@ -44,7 +43,7 @@ export default class ContentTabs extends React.Component {
 
   tabClick(menuObj) {
     this.props.menuStore.setActiveMenu(menuObj.path);
-    this.props.history.push(menuObj.path);
+    this.props.tabStore.setCurrent(menuObj);
   }
 
   render() {

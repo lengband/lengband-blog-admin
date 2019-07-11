@@ -1,0 +1,12 @@
+// 编辑器样式
+.editor-toolbar.fullscreen,
+.CodeMirror-fullscreen,
+.editor-preview-side,
+.editor-statusbar {
+  z-index: 1201 !important;
+}
+
+// 全局button
+.MuiButtonBase-root {
+  outline: none !important;
+}

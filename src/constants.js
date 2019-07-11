@@ -57,5 +57,17 @@ export const todoList = [
     id: "5",
     title: "webpack 添加 static 和 tree shake",
     tag: "webpack"
+  },
+  {
+    id: "6",
+    title: "nodejs 学习",
+    tag: "node",
+    content: "",
+    url: "https://elemefe.github.io/node-interview/#/sections/zh-cn/",
+    description: "如何通过饿了么 Node.js 面试"
   }
 ];
+
+export const keyCode = {
+  ENTER_KEY_CODE: 13
+};

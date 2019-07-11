@@ -1,3 +1,5 @@
+@import "./reset.scss";
+
 // 引入 Google Fonts
 @import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
@@ -26,12 +28,4 @@ a {
   &:visited {
     text-decoration: none;
   }
-}
-
-// 编辑器样式
-.editor-toolbar.fullscreen,
-.CodeMirror-fullscreen,
-.editor-preview-side,
-.editor-statusbar {
-  z-index: 1201 !important;
 }
