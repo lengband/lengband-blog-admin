@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   image: {
     // backgroundImage: "url(https://source.unsplash.com/random)", // 需要配置静态服务器
-    backgroundImage: "url(../../../../static/images/blog-bg.jpg)",
+    backgroundImage: "url(../../../../../static/images/blog-bg.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center"
