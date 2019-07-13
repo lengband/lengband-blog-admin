@@ -1,11 +1,14 @@
 import React from "react";
 import clsx from "clsx";
+import { observer, inject } from "mobx-react";
+import { matchRoutes } from "react-router-config";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import renderRoutes from "@/components/renderRoutes";
 import { Redirect } from "react-router-dom";
+import routes from "@/routes/routes";
 
 import ToolBar from "./ToolBar";
 import SliderMenu from "./SliderMenu";
@@ -69,7 +72,10 @@ const styles = theme => {
   };
 };
 
+@inject("tabStore")
+@inject("menuStore")
 @withStyles(styles)
+@observer
 class Layouts extends React.Component {
   constructor(props) {
     super(props);
@@ -78,6 +84,17 @@ class Layouts extends React.Component {
     };
     this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
     this.handleDrawerClose = this.handleDrawerClose.bind(this);
+  }
+
+  componentDidMount() {
+    this.pushRouter(this.props.location);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { location } = nextProps;
+    if (location.pathname !== this.props.location.pathname) {
+      this.pushRouter(location);
+    }
   }
 
   handleDrawerOpen() {
@@ -90,6 +107,14 @@ class Layouts extends React.Component {
     this.setState({
       open: false
     });
+  }
+
+  pushRouter(location) {
+    const { menuStore, tabStore } = this.props;
+    const matchList = matchRoutes(routes, location.pathname);
+    const isExactRoute = matchList.find(item => item.match.isExact);
+    tabStore.addRoute(isExactRoute.route);
+    menuStore.setActive(isExactRoute.route.name);
   }
 
   render() {

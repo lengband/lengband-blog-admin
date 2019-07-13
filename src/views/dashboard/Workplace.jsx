@@ -42,7 +42,7 @@ class Workplace extends React.Component {
             <Box display="flex">
               <Avatar
                 className={classes.avatar}
-                alt="Remy Sharp"
+                alt="avatar"
                 src="/static/images/avatar.jpg"
               />
               <Box

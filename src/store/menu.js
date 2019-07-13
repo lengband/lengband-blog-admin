@@ -21,9 +21,9 @@ class MenuStore {
     const matched = matchList.find(
       item => item.match.isExact && item.match.path === locationPath
     );
-    const { name, redirectName } = matched.route;
-    const active = redirectName || name;
     if (matched) {
+      const { name, redirectName } = matched.route;
+      const active = redirectName || name;
       this.setActive(active);
     }
   }

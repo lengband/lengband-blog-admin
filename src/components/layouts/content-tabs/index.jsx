@@ -1,9 +1,7 @@
 import React from "react";
-import { matchRoutes } from "react-router-config";
 import { withStyles } from "@material-ui/core/styles";
 import { AppBar, Tabs } from "@material-ui/core";
 import { observer, inject } from "mobx-react";
-import routes from "@/routes/routes";
 import LinkTab from "./LinkTab";
 
 const styles = theme => ({
@@ -32,17 +30,10 @@ export default class ContentTabs extends React.Component {
   }
 
   componentDidMount() {
-    const {
-      location: { pathname }
-    } = this.props.history;
-    const matchList = matchRoutes(routes, pathname);
-    const isExactRoute = matchList.find(item => item.match.isExact);
-    this.props.tabStore.addRoute(isExactRoute.route);
     this.props.tabStore.routerHistory = this.props.history;
   }
 
   tabClick(menuObj) {
-    this.props.menuStore.setActiveMenu(menuObj.path);
     this.props.tabStore.setCurrent(menuObj);
   }
 
