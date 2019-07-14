@@ -1,4 +1,5 @@
 import React from "react";
+import { observer, inject } from "mobx-react";
 import { withStyles } from "@material-ui/core/styles";
 import {
   List,
@@ -20,40 +21,35 @@ const styles = theme => ({
   }
 });
 
+@inject("articlesStore")
 @withStyles(styles)
+@observer
 export default class CreatedArticles extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, articlesStore } = this.props;
 
     return (
       <List
         subheader={<ListSubheader color="inherit">已完成</ListSubheader>}
         className={classes.root}
       >
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-          </ListItemAvatar>
-          <ListItemText id="switch-list-label-wifi" primary="Wi-Fi" />
-          <ListItemSecondaryAction>
-            <IconButton aria-label="Settings">
-              <MoreVertIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <ListItem>
-          <Avatar alt="Avatar" src="/static/images/avatar.jpg" />
-          <ListItemText id="switch-list-label-bluetooth" primary="Bluetooth" />
-          <ListItemSecondaryAction>
-            <IconButton aria-label="Settings">
-              <MoreVertIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        {articlesStore.doneArtcles.map(item => (
+          <ListItem key={item.id}>
+            <ListItemAvatar>
+              <Avatar alt="avatar" src={item.avatar} />
+            </ListItemAvatar>
+            <ListItemText id="switch-list-label-wifi" primary={item.title} />
+            <ListItemSecondaryAction>
+              <IconButton aria-label="Settings">
+                <MoreVertIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
       </List>
     );
   }

@@ -1,15 +1,5 @@
-import { action, observable } from "mobx";
+// import { action, observable } from "mobx";
 
-class Dashboard {
-  @observable
-  articles = [];
-
-  @action
-  getArticles() {
-    Promise.resolve(articles => {
-      this.articles = articles;
-    });
-  }
-}
+class Dashboard {}
 
 export default new Dashboard();

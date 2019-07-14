@@ -71,3 +71,24 @@ export const todoList = [
 export const keyCode = {
   ENTER_KEY_CODE: 13
 };
+
+export const activeList = [
+  {
+    id: 1,
+    content: "Brunch this weekend?",
+    time: 1563011785408,
+    author: "Jhhn",
+    avatar: "/static/images/avatar.jpg",
+    questionFrom: "Alias",
+    question: "I'll be in your neighborhood doing errands this…"
+  },
+  {
+    id: 2,
+    content: "Brunch this weekend?",
+    time: 1563011785408,
+    author: "Jhhn",
+    avatar: "/static/images/avatar.jpg",
+    questionFrom: "Alias",
+    question: "I'll be in your neighborhood doing errands this…"
+  }
+];

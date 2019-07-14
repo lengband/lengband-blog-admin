@@ -18,6 +18,7 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import clsx from "clsx";
+import moment from "moment";
 
 const styles = theme => ({
   "articles-creating-wrapper": {
@@ -29,13 +30,30 @@ const styles = theme => ({
   }
 });
 
-@inject("dashboardStore")
+const COLUNMS = 3;
+
+const setRow = doingArtcles => {
+  const arr = [];
+  doingArtcles.forEach((item, index) => {
+    const columnIndex = index % COLUNMS; // 第几列
+    const rowIndex = Math.floor(index / COLUNMS);
+    if (columnIndex === 0) {
+      arr.push([item]);
+    } else {
+      arr[rowIndex].push(item);
+    }
+  });
+  return arr;
+};
+
+@inject("articlesStore")
 @withStyles(styles)
 @observer
 class Workplace extends React.Component {
   constructor(props) {
     super(props);
     this.pushArticle = this.pushArticle.bind(this);
+    this.setRow = this.setRow.bind(this);
   }
 
   pushArticle() {
@@ -43,14 +61,15 @@ class Workplace extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, articlesStore } = this.props;
+    const rows = setRow(articlesStore.doingArtcles);
 
     return (
       <List
         className={clsx(classes["articles-creating-wrapper"], "p-3", "rounded")}
       >
         <ListItem className="justify-content-between">
-          <Typography variant="h5" component="h5">
+          <Typography variant="h6" component="h6">
             进行中
           </Typography>
           <Link component="button" onClick={this.pushArticle}>
@@ -59,161 +78,40 @@ class Workplace extends React.Component {
         </ListItem>
         <Divider />
         <ListItem>
-          <Box>
-            <Grid container spacing={1}>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
+          <Box className="w-100">
+            {rows.map((columns, index) => (
+              <Grid key={index} container spacing={1}>
+                {columns.map(column => (
+                  <Grid
+                    key={column.id}
+                    item
+                    xs={4}
+                    className={classes["creating-card"]}
                   >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
+                    <Card square elevation={0}>
+                      <CardHeader
+                        avatar={
+                          <Avatar
+                            alt="avatar"
+                            src="/static/images/avatar.jpg"
+                          />
+                        }
+                        title={column.title}
+                        subheader={moment(column.time).format("YYYY-MM-DD")}
+                        action={
+                          <IconButton aria-label="Settings">
+                            <MoreVertIcon />
+                          </IconButton>
+                        }
+                      />
+                      <CardContent>
+                        <Typography>{column.content}</Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-            <Grid container spacing={1}>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={4} className={classes["creating-card"]}>
-                <Card square elevation={0}>
-                  <CardHeader
-                    avatar={
-                      <Avatar alt="avatar" src="/static/images/avatar.jpg" />
-                    }
-                    title="webpack 重头再来"
-                    subheader="2019-07-12"
-                    action={
-                      <IconButton aria-label="Settings">
-                        <MoreVertIcon />
-                      </IconButton>
-                    }
-                  >
-                    <Typography variant="h5" component="h5">
-                      Alipay
-                    </Typography>
-                  </CardHeader>
-                  <CardContent>
-                    <Typography>
-                      那是一种内在的东西，他们到达不了，也无法触及
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
+            ))}
           </Box>
         </ListItem>
       </List>

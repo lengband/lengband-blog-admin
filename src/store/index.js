@@ -3,13 +3,15 @@ import dashboardStore from "./dashboard";
 import menuStore from "./menu";
 import tabStore from "./tabs";
 import todoStore from "./todo";
+import articlesStore from "./articles";
 
 const stores = {
   appStore,
   dashboardStore,
   menuStore,
   tabStore,
-  todoStore
+  todoStore,
+  articlesStore
 };
 
 export default stores;
