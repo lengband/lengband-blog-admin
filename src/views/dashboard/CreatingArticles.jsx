@@ -53,7 +53,6 @@ class Workplace extends React.Component {
   constructor(props) {
     super(props);
     this.pushArticle = this.pushArticle.bind(this);
-    this.setRow = this.setRow.bind(this);
   }
 
   pushArticle() {
