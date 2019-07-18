@@ -5,7 +5,7 @@ import {
   FormControlLabel,
   Checkbox,
   Link,
-  Paper,
+  Card,
   Grid,
   Typography
 } from "@material-ui/core";
@@ -20,21 +20,26 @@ const styles = theme => ({
     height: "100vh"
   },
   image: {
-    // backgroundImage: "url(https://source.unsplash.com/random)", // 需要配置静态服务器
-    backgroundImage: "url(../../../../../static/images/blog-bg.jpg)",
+    backgroundImage: "url(https://source.unsplash.com/random)", // 需要配置静态服务器
+    // backgroundImage: "url(../../../../../static/images/blog-bg.jpg)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center"
   },
   paper: {
-    margin: theme.spacing(8, 4),
+    padding: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    margin: "-10% auto 0"
+  },
+  card: {
+    padding: theme.spacing(4)
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    padding: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+    margin: "10px auto"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -93,6 +98,7 @@ export default class Login extends React.Component {
 
   changeFormType(type) {
     this.setState({
+      ...this.state,
       formMode: FORM_MODE[type || "login"]
     });
   }
@@ -120,6 +126,7 @@ export default class Login extends React.Component {
     // xxx
     setTimeout(() => {
       this.setState({
+        ...this.state,
         formMode: FORM_MODE.reset
       });
     }, 1000);
@@ -135,12 +142,21 @@ export default class Login extends React.Component {
 
   goLogin() {
     this.setState({
+      ...this.state,
       loading: true
     });
+    setTimeout(() => {
+      this.setState({
+        ...this.state,
+        loading: false
+      });
+      this.props.history.push("/dashboard");
+    }, 3000);
   }
 
   formChange(event) {
     this.setState({
+      ...this.state,
       formData: {
         ...this.state.formData,
         [event.target.name]: event.target.value
@@ -182,26 +198,19 @@ export default class Login extends React.Component {
         </Grid>
       ) : null;
     return (
-      <Grid container component="main" className={classes.root}>
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid
-          className="position-relative"
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
-        >
-          <Box position="absolute" top={10} right={10}>
-            Lengband Blog
-          </Box>
-          <div className={classes.paper}>
+      <Box
+        position="relative"
+        className={`${classes.image} ${classes.root} d-flex`}
+      >
+        <Box position="absolute" top={10} right={10}>
+          Lengband Blog
+        </Box>
+        <div className={`${classes.paper} justify-content-center`}>
+          <Card className={classes.card}>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography className="text-center" component="h1" variant="h5">
               {title}
             </Typography>
             <ValidatorForm style={{ width: "100%" }} onSubmit={this.submit}>
@@ -234,9 +243,9 @@ export default class Login extends React.Component {
             </ValidatorForm>
             {RememberBtn}
             {LoginControl}
-          </div>
-        </Grid>
-      </Grid>
+          </Card>
+        </div>
+      </Box>
     );
   }
 }

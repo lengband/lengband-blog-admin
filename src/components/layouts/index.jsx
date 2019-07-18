@@ -10,7 +10,7 @@ import renderRoutes from "@/components/renderRoutes";
 import { Redirect } from "react-router-dom";
 import routes from "@/routes/routes";
 
-import ToolBar from "./ToolBar";
+import ToolBar from "./toolbar/index";
 import SliderMenu from "./SliderMenu";
 import ContentTabs from "./content-tabs/index";
 import { drawerWidth } from "@/constants";

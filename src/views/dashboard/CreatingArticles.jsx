@@ -75,7 +75,7 @@ class Workplace extends React.Component {
             全部
           </Link>
         </ListItem>
-        <Divider />
+        <Divider className="mb-2" />
         <ListItem>
           <Box className="w-100">
             {rows.map((columns, index) => (
