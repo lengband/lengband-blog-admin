@@ -29,6 +29,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     })
   },
+  toolbar: {
+    paddingRight: 12
+  },
   menuButton: {
     marginRight: 36
   },
@@ -97,7 +100,7 @@ export default class ToolBar extends React.Component {
           [classes.appBarShift]: open
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <IconButton
             color="inherit"
             aria-label="Open drawer"

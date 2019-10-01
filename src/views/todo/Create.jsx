@@ -115,7 +115,6 @@ export default class Create extends React.Component {
         </Fab>
         <Dialog
           open={open}
-          classes={{ paper: true }}
           onClose={this.cancel}
           aria-labelledby="customized-dialog-title"
         >

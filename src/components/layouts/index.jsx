@@ -7,7 +7,6 @@ import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import renderRoutes from "@/components/renderRoutes";
-import { Redirect } from "react-router-dom";
 import routes from "@/routes/routes";
 
 import ToolBar from "./toolbar/index";
@@ -87,6 +86,10 @@ class Layouts extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.location.pathname === "/") {
+      this.props.history.push("/dashboard");
+      return;
+    }
     this.pushRouter(this.props.location);
   }
 
@@ -153,12 +156,7 @@ class Layouts extends React.Component {
           })}
         >
           <ContentTabs history={this.props.history} />
-          <main className={classes.content}>
-            {location.pathname === "/" ? (
-              <Redirect to={route.redirectTo} />
-            ) : null}
-            {RouterMaps}
-          </main>
+          <main className={classes.content}>{RouterMaps}</main>
         </div>
       </div>
     );
