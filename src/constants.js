@@ -1,3 +1,5 @@
+import { createMuiTheme } from "@material-ui/core/styles";
+
 export const drawerWidth = 240;
 
 export const snackbarConfig = {
@@ -7,6 +9,19 @@ export const snackbarConfig = {
     horizontal: "right"
   }
 };
+
+export const globalTheme = createMuiTheme({
+  overrides: {
+    MuiContainer: {
+      root: {
+        width: "100%"
+      },
+      maxWidthLg: {
+        maxWidth: "100%!important"
+      }
+    }
+  }
+});
 
 export const tagOpts = [
   { value: "fe", label: "前端" },
